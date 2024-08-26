@@ -6,7 +6,7 @@ workspace provisioner, see the article on <a href="/admin/auth">Authentication</
 </blockquote>
 
 Coder is open-minded about how you get your secrets into your workspaces.
-This means you can continue to use the same workflow and tools you already use to manage secrets locally in your Coder workspace. 
+This means you can continue to use the same workflow and tools you already use to manage secrets locally can be brought over to your Coder workspace. 
 
 Usually this workflow looks like,
 
