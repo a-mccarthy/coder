@@ -1,27 +1,24 @@
-# Secrets
+# Secrets in a workspace
 
 <blockquote class="info">
 This article explains how to use secrets in a workspace. To authenticate the
-workspace provisioner, see <a href="/admin/auth">this</a>.
+workspace provisioner, see the article on <a href="/admin/auth">Authentication</a>.
 </blockquote>
 
 Coder is open-minded about how you get your secrets into your workspaces.
+This means you can continue to use the same workflow and tools you already use to manage secrets locally in your Coder workspace. 
 
-## Wait a minute...
-
-Your first stab at secrets with Coder should be your local method. You can do
-everything you can locally and more with your Coder workspace, so whatever
-workflow and tools you already use to manage secrets may be brought over.
-
-Often, this workflow is simply:
+Usually this workflow looks like,
 
 1. Give your users their secrets in advance
 1. Your users write them to a persistent file after they've built their
    workspace
-
-[Template parameters](./templates/parameters.md) are a dangerous way to accept
-secrets. We show parameters in cleartext around the product. Assume anyone with
+   
+<blockquote class="warning">
+Its strongly recommended that you do not use <a href="./templates/parameters.md">template parameters</a> to accept
+secrets. Parameters are shown in cleartext in Coder. Assume anyone with
 view access to a workspace can also see its parameters.
+</blockquote>
 
 ## SSH Keys
 
@@ -30,12 +27,12 @@ authentication mechanism for git providers or other tools. Within workspaces,
 git will attempt to use this key within workspaces via the `$GIT_SSH_COMMAND`
 environment variable.
 
+SSH keys are never stored in Coder workspaces, and are fetched only when
+SSH is invoked. The keys are held in-memory and never written to disk.
+
 Users can view their public key in their account settings:
 
 ![SSH keys in account settings](./images/ssh-keys.png)
-
-> Note: SSH keys are never stored in Coder workspaces, and are fetched only when
-> SSH is invoked. The keys are held in-memory and never written to disk.
 
 ## Dynamic Secrets
 
@@ -47,7 +44,7 @@ This method is limited to
 [services with Terraform providers](https://registry.terraform.io/browse/providers),
 which excludes obscure API providers.
 
-Dynamic secrets can be implemented in your template code like so:
+Add dynamic secrets into your template code using the following:
 
 ```hcl
 resource "twilio_iam_api_key" "api_key" {
@@ -65,8 +62,8 @@ resource "coder_agent" "main" {
 ```
 
 A catch-all variation of this approach is dynamically provisioning a cloud
-service account (e.g
-[GCP](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/google_service_account_key#private_key))
+service account, for example 
+[GCP](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/google_service_account_key#private_key),
 for each workspace and then making the relevant secrets available via the
 cloud's secret management system.
 
