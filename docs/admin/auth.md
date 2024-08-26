@@ -1,14 +1,35 @@
 # Authentication
 
-![OIDC with Coder Sequence Diagram](../images/oidc-sequence-diagram.svg).
+```
+Insert an overview of authentication, include
 
-By default, Coder is accessible via password authentication. Coder does not
+1. Who is authenticating into what
+2. Users that are able to set up authentication.
+3. Include a link to get more details about User roles, https://coder.com/docs/admin/users.
+4. When its important to set up Authentication, right after install? everytime a new user is added? When deploying to a new enviroment (dev, production)?
+
+```
+
+> By default, Coder is accessible via password authentication. Coder does not
 recommend using password authentication in production, and recommends using an
 authentication provider with properly configured multi-factor authentication
 (MFA). It is your responsibility to ensure the auth provider enforces MFA
 correctly.
 
-The following steps explain how to set up GitHub OAuth or OpenID Connect.
+```
+Depending on how long and distinct this information is, I'd recommend breaking the Authentication topic up into different pages to give readers information on how to set up the different Authentication methods. So, break up Password, Github, and OpenID Connect into seprate pages under Authentication heading and list the pages from most to least used or recommend authentication type.  
+
+Other sections to include in an Authentication section:
+* Any limitations or precautions to take if you change they Authentication method on a running platform
+
+```
+
+## Password authentication
+
+```
+Add information about how password authentication works. Its mentioned in the note that recommends not to use password authentication in production, but the concept is never explained. 
+```
+
 
 ## GitHub
 
@@ -507,6 +528,10 @@ Below are some details specific to individual OIDC providers.
      example.
 
 ### Keycloak
+
+```
+Is there any testing or versioning that important to highlight for this information? Include a link to an related of set up docs for Keycloak.
+```
 
 The access_type parameter has two possible values: "online" and "offline." By
 default, the value is set to "offline". This means that when a user
